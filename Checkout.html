@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        input{
+            margin-top:30px;
+            display: block;
+            height:35px;
+            width:20%;
+            margin: auto;
+            margin-top:30px;
+            font-size: 18px;
+        }
+        h1{
+            text-align: center;
+            color:red;
+        }
+        button{
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            height:30px;
+            width:20%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Customer Details</h1>
+    <!-- <form action="" id="myform"> -->
+    <input type="text" placeholder=" Street" id="name">
+    <input type="text" placeholder=" Town">
+    <input type="text" placeholder=" City">
+    <input type="text" placeholder=" State">
+    <input type="text" placeholder=" PinCode">
+    <button >Submit</button>
+    <!-- </form> -->
+    
+</body>
+
+<script>
+    document.querySelector("button").addEventListener("click",access);
+
+    function access(event){
+    //  event.preventDefault();
+    //  console.log(document.querySelector("#name").value);
+      setTimeout (function(){
+        alert("Your Oredr is accepted");
+      },250);
+      setTimeout (function(){
+          alert("Your order Being Cooked")
+      },5250)
+      setTimeout (function(){
+          alert("Your order is ready")
+      },10250)
+      setTimeout (function(){
+          alert("Your order out for delivery")
+      },15250)
+      setTimeout (function(){
+          alert("Your order delivered")
+      },20250)
+    }
+</script>
+</html>

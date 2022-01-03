@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #main{
+            display:flex;
+            justify-content: right;
+            background-color: #08345b;
+        }
+       #main>button{
+            padding:40px;
+            color: crimson;
+            margin-right:20px ;
+            background-color: transparent;
+            border: 0px;
+            font-size: 18px;
+        }
+        #items{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap:30px;
+        }
+        #items>div>img{
+            height:200px;
+            width:100%;
+        }
+        /* #dis{
+            display:flex;
+            width:20%;
+        } */
+        #length{
+            margin-right: 30px;
+            color: red;
+            font-size: 25px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <button>Menu</button>
+        <button>SignUp</button>
+        <button>Login</button>
+        <button id="dis">Cart</button>
+             <p id=length></p>
+        <!-- <p id=length></p> -->
+    </div>
+    <div id="items"></div>
+
+</body>
+
+<script>
+   cart= JSON.parse(localStorage.getItem("items"))||[];
+   let count=document.querySelector("#length");
+   count.textContent=cart.length;
+    async function items(){
+      try{
+        let res  = await fetch("https://themealdb.com/api/json/v1/1/categories.php");
+
+        let data= await res.json();
+        console.log(data);
+
+        items_arr=data.categories;
+        console.log('items_arr:', items_arr)
+        Showitems(items_arr);
+      }
+      catch(err){
+          console.log('err:', err);
+      }
+    }
+    items();
+
+function Showitems(items){
+    console.log(items);
+  items.map(function(items){
+    items_div=document.querySelector("#items");
+    div=document.createElement("div")
+   img=document.createElement("img");
+   img.src=items.strCategoryThumb;
+  
+   h3=document.createElement("h3");
+   h3.textContent= items.strCategory;
+//    description=document.createElement("h3");
+//    description.textContent=items.strCategoryDescription;
+
+price=document.createElement("h3");
+price.textContent= Math.round(Math.random()*500);
+
+   
+   button=document.createElement("button");
+button.textContent="ADD TO CART"
+button.addEventListener("click",function(){
+    
+    cart.push(items);
+    localStorage.setItem("items",JSON.stringify(cart));
+    console.log(cart);
+})
+
+   div.append(img,h3, price,button);
+   items_div.append(div);
+   let count=document.querySelector("#length");
+   count.textContent=cart.length;
+  })
+}
+</script>
+</html>

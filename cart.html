@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        #main{
+            display:flex;
+            justify-content: right;
+            background-color: #08345b;
+        }
+        #main>button{
+            padding:40px;
+            color: crimson;
+            margin-right:20px ;
+            background-color: transparent;
+            border: 0px;
+            font-size: 18px;
+        }
+        #length{
+            margin-right: 30px;
+            color: red;
+            font-size: 25px;
+            padding: 40px;
+        }
+        #carts{
+            width:50%;
+            margin:auto;
+            height:500px;
+            border:solid 1px gray;
+            margin-top:20px;
+            overflow: scroll;
+           
+        }
+        #carts>div{
+            border:solid 1px gray;
+            display: flex;
+        }
+        #cart>div>div{
+            display:flex;
+            margin-left: 30px;
+        }
+        h3{
+            color:red;
+            margin-left: 30px;
+        }
+    #am{
+        text-align: center;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <button>Menu</button>
+        <button>SignUp</button>
+        <button>Login</button>
+        <button>Cart</button>
+        <p id="length"></p>
+    </div>
+
+    <div id='carts'>
+
+    </div>
+    <div style="display:flex" id="total">
+        <h1 id="am"> Total Amount:</h1>
+    </div>
+    
+</body>
+<script>
+ 
+    let cart=JSON.parse(localStorage.getItem("items"));
+   display();
+function display(){ 
+    sum = 0; 
+  cart.map(function(items,index){
+    items_div=document.querySelector("#carts");
+    div=document.createElement("div")
+    imgdiv=document.createElement("div");
+   img=document.createElement("img");
+   img.src=items.strCategoryThumb;
+   imgdiv.append(img);
+ let textdiv=document.createElement("div");
+   h3=document.createElement("h3");
+   h3.textContent= items.strCategory;
+price=document.createElement("h3");
+price.textContent= Math.round(Math.random()*500);
+price.setAttribute("id","price");
+
+remove=document.createElement("button");
+remove.textContent="Remove";
+remove.addEventListener("onclick",function(){
+ 
+  cart.splice(index,0);
+})
+textdiv.append(h3,price,remove);
+   div.append(imgdiv,textdiv);
+   items_div.append(div);
+   let count=document.querySelector("#length");
+   count.textContent=cart.length;
+   console.log(div);
+  })
+}  
+
+       
+
+</script>
+
+
+</html>
